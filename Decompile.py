@@ -44,7 +44,7 @@ def createHooks():
 	Date = Find("grep -Ril 'R.string.days_ago_abbreviation' %s/com/instagram/util/" % Hash)
 	Push = Find("grep -Ril 'push_notification_received' %s/com/instagram/notifications/" % Hash)
 	Stories_Inject = Find("grep -Ril 'explore_viewer' %s/com/instagram/" % Hash)
-	Stories_Helper = Find("grep -Ril 'POST_LIVE || !'' %s/com/instagram/" % Hash)
+	Stories_Helper = Find("grep -Ril 'POST_LIVE || !' %s/com/instagram/" % Hash)
 	StoriesTimer = Find("grep -Ril 'reel_playback_entry' %s/com/instagram/" % Hash)
 	MiniFeed = Find("grep -Ril 'R.string.see_fewer_posts_like_this_toast' %s/com/instagram/feed/" % Hash)
 	Follow_Data = Find("grep -Ril 'R.id.follow_list_social_context' %s/com/instagram/" % Hash)
@@ -67,15 +67,7 @@ def createHooks():
 
 	Line = Hooks.split(";")
 
-	versionLine = "aapt dump badging *.apk"
-	procVersion = subprocess.Popen(versionLine, stdout=subprocess.PIPE, shell=True)
-	(outputVersion, err) = procVersion.communicate()
-
-	Code = outputVersion.split("name'com.")
-	Test = Code[0].split("versionCode")
-	Version = Code[0].replace(Test[1], "")
-	Version = Version.replace("' versionCode", "")
-	Version = Version.replace("package: name='", "") 
+	Version = "111111"
 
 	Hooks = Hooks.replace(Line[0], Version)
 
@@ -107,11 +99,12 @@ def createHooks():
 	if Push:
 		Hooks = Hooks.replace(Line[44], Push)
 	if Stories_Inject:
-		Hooks = Hooks.replace(Line[47], Stories_Inject)
+		Hooks = Hooks.replace(Line[46], Stories_Inject)
+	if StoriesTimer:
+		Hooks = Hooks.replace(Line[47], StoriesTimer)
+		Hooks = Hooks.replace(Line[51], StoriesTimer)
 	if Stories_Helper:
 		Hooks = Hooks.replace(Line[48], Stories_Helper)
-	if StoriesTimer:
-		Hooks = Hooks.replace(Line[49], StoriesTimer)
 	if MiniFeed:
 		Hooks = Hooks.replace(Line[54], MiniFeed)
 	if Follow_Data:
@@ -174,7 +167,8 @@ def Find(cmd):
 
 def main():
 	try:
-		decompileInstagram()
+		#decompileInstagram()
+		fetchHooks()
 	except BaseException as error:
 		print("Failed Decompiling Instagram ", error)
 
