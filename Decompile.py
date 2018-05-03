@@ -34,6 +34,7 @@ def createHooks():
 	Feed = Find("grep -Ril 'HashMap<String, ArrayList<ProductTag>> hashMap' %s/com/instagram/feed" % Hash)
 	User = Find("grep -Ril 'Follow status:' %s/com/instagram/" % Hash)
 	Feed_Inject = Find("grep -Ril 'action_menu' %s/com/instagram/feed/" % Hash)
+	Direct = Find("grep -Ril 'seen_direct_unseen_message_dialog' %s/com/instagram/" % Hash)
 	Feed_Image = Find("grep -Ril 'full_size_' %s/com/instagram/feed" % Hash)
 	Comments =  Find("grep -Ril 'onSingleTapUp' %s/com/instagram/comments/" % Hash)
 	Comments2 =  Find("grep -Ril 'Comment{mCreatedAtSeconds' %s/com/instagram/" % Hash)
@@ -51,6 +52,7 @@ def createHooks():
 	Share = Find("grep -Ril 'clipboard' %s/com/instagram/feed/" % Hash)
 	Tagged = Find("grep -Ril 'public ArrayList<PeopleTag>' %s/com/instagram/feed/" % Hash)
 	Gallery = Find("grep -Ril 'failed to load recent captures' %s/com/instagram/feed/" % Hash)
+	Search = Find("grep -Ril 'instagram_search_results' %s/com/instagram/" % Hash)
 	Location = Find("grep -Ril 'RecentPlaceSearchCache' %s/com/instagram/" % Hash)
 	Users = Find("grep -Ril 'RecentPlaceSearchCache' %s/com/instagram/" % Hash)
 	Sponsored = Find("grep -Ril 'explore_unconnected' %s/com/instagram/" % Hash)
@@ -79,6 +81,9 @@ def createHooks():
 		Hooks = Hooks.replace(Line[4], User)
 	if Feed_Inject:
 		Hooks = Hooks.replace(Line[5], Feed_Inject)
+	if Direct:
+		Hooks = Hooks.replace(Line[6], Direct)
+		Hooks = Hooks.replace(Line[7], Direct)
 	if Feed_Image:
 		Hooks = Hooks.replace(Line[18], Feed_Image)
 	if Comments:
@@ -115,6 +120,8 @@ def createHooks():
 		Hooks = Hooks.replace(Line[58], Tagged)
 	if Gallery:
 		Hooks = Hooks.replace(Line[72], Gallery)
+	if Search:
+		Hooks = Hooks.replace(Line[73], Search)
 	if Location:
 		Hooks = Hooks.replace(Line[74], Location)
 	if Users:
@@ -167,8 +174,7 @@ def Find(cmd):
 
 def main():
 	try:
-		#decompileInstagram()
-		fetchHooks()
+		decompileInstagram()
 	except BaseException as error:
 		print("Failed Decompiling Instagram ", error)
 
