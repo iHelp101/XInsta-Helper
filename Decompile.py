@@ -34,14 +34,14 @@ def createHooks():
 	Feed = Find("grep -Ril 'HashMap<String, ArrayList<ProductTag>> hashMap' %s/com/instagram/feed" % Hash)
 	User = Find("grep -Ril 'Follow status:' %s/com/instagram/" % Hash)
 	Feed_Inject = Find("grep -Ril 'action_menu' %s/com/instagram/feed/" % Hash)
-	Direct = Find("grep -Ril 'seen_direct_unseen_message_dialog' %s/com/instagram/" % Hash)
+	Direct_Hold = Find("grep -Ril 'seen_direct_unseen_message_dialog' %s/com/instagram/" % Hash)
 	Feed_Image = Find("grep -Ril 'full_size_' %s/com/instagram/feed" % Hash)
 	Comments =  Find("grep -Ril 'onSingleTapUp' %s/com/instagram/comments/" % Hash)
 	Comments2 =  Find("grep -Ril 'Comment{mCreatedAtSeconds' %s/com/instagram/" % Hash)
 	Dialog = Find("grep -Ril 'message_avatar_container' %s/com/instagram/" % Hash)	
 	Profile = Find("grep -Ril 'https://www.instagram' %s/com/instagram/profile/" % Hash)
 	Like = Find("grep -Ril 'isTouchExplorationEnabled' %s/com/instagram/feed/ui" % Hash)
-	Suggestion = Find("grep -Ril 'R.layout.mainfeed_generic_megaphone' %s/com/instagram/feed/ui" % Hash)
+	Suggestion = Find("grep -Ril 'R.layout.mainfeed_generic_megaphone' %s/com/instagram/" % Hash)
 	Date = Find("grep -Ril 'R.string.days_ago_abbreviation' %s/com/instagram/util/" % Hash)
 	Push = Find("grep -Ril 'push_notification_received' %s/com/instagram/notifications/" % Hash)
 	Stories_Inject = Find("grep -Ril 'explore_viewer' %s/com/instagram/" % Hash)
@@ -54,7 +54,7 @@ def createHooks():
 	Gallery = Find("grep -Ril 'failed to load recent captures' %s/com/instagram/feed/" % Hash)
 	Search = Find("grep -Ril 'instagram_search_results' %s/com/instagram/" % Hash)
 	Location = Find("grep -Ril 'RecentPlaceSearchCache' %s/com/instagram/" % Hash)
-	Users = Find("grep -Ril 'RecentPlaceSearchCache' %s/com/instagram/" % Hash)
+	Users = Find("grep -Ril 'recent_hashtag_searches_with_ts";' %s/com/instagram/" % Hash)
 	Sponsored = Find("grep -Ril 'explore_unconnected' %s/com/instagram/" % Hash)
 	VideoLikes = Find("grep -Ril 'R.plurals.x_y_and_n_others' %s/com/instagram/feed/" % Hash)
 	ExoPlayer = Find("grep -Ril 'Exception when setSubtitle' %s/com/instagram/" % Hash)
@@ -81,9 +81,9 @@ def createHooks():
 		Hooks = Hooks.replace(Line[4], User)
 	if Feed_Inject:
 		Hooks = Hooks.replace(Line[5], Feed_Inject)
-	if Direct:
-		Hooks = Hooks.replace(Line[6], Direct)
-		Hooks = Hooks.replace(Line[7], Direct)
+	if Direct_Hold:
+		Hooks = Hooks.replace(Line[6], Direct_Hold)
+		Hooks = Hooks.replace(Line[7], Direct_Hold)
 	if Feed_Image:
 		Hooks = Hooks.replace(Line[18], Feed_Image)
 	if Comments:
