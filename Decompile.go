@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-    fetchHooks()
+    decompileInstagram()
 }
 
 func createHooks(hooks string) {
@@ -212,6 +212,7 @@ func createHooks(hooks string) {
 func decompileInstagram() {
     exec.Command("/bin/bash", "-c", "jadx/bin/jadx *.apk -d output").Output()
     fmt.Println("Decompiled")
+    fetchHooks()
 }
 
 func fetchHooks() {
